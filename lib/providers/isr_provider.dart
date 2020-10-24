@@ -1,13 +1,18 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import "package:googleapis_auth/auth_io.dart";
 import 'dart:io';
 
 class IsrProvider {
-  static Future<http.Response> calculateISR(double brute_wage) {
-    final key = 'AIzaSyDswtrLx139yeFuE2qH09cx2_i7e20z6UE';
+  static Future<http.Response> calculateISR(double brute_wage) async {
+    var response = await http
+        .get('https://jwt-acces-token-generator-urhxsjsspa-uc.a.run.app/token');
 
-    return http.get(
-        'https://isr-test-12d15d55.uc.gateway.dev/ISR/$brute_wage?key=$key');
+    var objJson = json.decode(response.body);
+    var access_token = objJson['response']['id_token'];
+    return http.get('https://isr-urhxsjsspa-uc.a.run.app/ISR/$brute_wage',
+        headers: {'Authorization': 'Bearer $access_token'});
   }
 }
 //  Future<http.Response> calculateISR(double brute_wage) {

@@ -101,7 +101,6 @@ class IsrPage extends StatelessWidget {
       netWage = bruteWage - isr;
       _controllerNetTF.text = "\$${netWage.toString()}";
       _controllerISR.text = mapIsr['ISR'];
-      print("Resouesta: ${value.body}");
     });
     // isr_provider.calculateISR(bruteWage).then((http.Response value) {
     //   mapIsr = json.decode(value.body);
