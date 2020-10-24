@@ -93,7 +93,16 @@ class IsrPage extends StatelessWidget {
     double bruteWage;
     //Format the input Brute Wage
     bruteWage = formattingISRNumber(_controllerBruteTF.text);
-    IsrProvider.DoProcess();
+
+    IsrProvider.calculateISR(bruteWage).then((http.Response value) {
+      mapIsr = json.decode(value.body);
+      print("Repuesta:  $mapIsr");
+      double isr = formattingISRNumber(mapIsr['ISR']);
+      netWage = bruteWage - isr;
+      _controllerNetTF.text = "\$${netWage.toString()}";
+      _controllerISR.text = mapIsr['ISR'];
+      print("Resouesta: ${value.body}");
+    });
     // isr_provider.calculateISR(bruteWage).then((http.Response value) {
     //   mapIsr = json.decode(value.body);
     //   print("Repuesta:  $mapIsr");
