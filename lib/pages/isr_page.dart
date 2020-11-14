@@ -1,5 +1,3 @@
-import 'dart:wasm';
-
 import 'package:flutter/material.dart';
 import 'package:mini_app_isr/providers/isr_provider.dart';
 import 'package:http/http.dart' as http;
